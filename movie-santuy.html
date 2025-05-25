@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Movie Santuy</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #111;
+      color: #fff;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #00ffc8;
+      margin-bottom: 10px;
+    }
+    .marquee {
+      background: #222;
+      padding: 10px;
+      color: #00ffc8;
+      font-weight: bold;
+      overflow: hidden;
+      position: relative;
+      margin-bottom: 20px;
+    }
+    .marquee span {
+      display: inline-block;
+      padding-left: 100%;
+      animation: marquee 15s linear infinite;
+    }
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-100%); }
+    }
+    .movie-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    .movie-card {
+      background: #1e1e1e;
+      border-radius: 10px;
+      padding: 15px;
+      text-align: center;
+      transition: transform 0.3s;
+    }
+    .movie-card:hover {
+      transform: scale(1.03);
+    }
+    .movie-card img {
+      width: 100%;
+      height: 350px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+    .movie-title {
+      font-size: 20px;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+    .movie-description {
+      font-size: 14px;
+      color: #ccc;
+      margin-bottom: 12px;
+    }
+    .download-btn {
+      text-decoration: none;
+      background: #00ffc8;
+      color: #000;
+      padding: 10px 15px;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: background 0.3s;
+      display: inline-block;
+      margin-bottom: 10px;
+    }
+    .download-btn:hover {
+      background: #00cc9f;
+    }
+    textarea {
+      width: 100%;
+      min-height: 100px;
+      padding: 10px;
+      border-radius: 8px;
+      border: none;
+      background: #2a2a2a;
+      color: #fff;
+      resize: vertical;
+      font-family: monospace;
+    }
+    textarea::placeholder {
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+  <h1>Movie Santuy</h1>
+  <div class="marquee"><span>🔥 WATCH NOW ONLEN - FREE 2025 MOVIES 🔥</span></div>
+  <div class="movie-list"></div>
+
+  <script type="text/javascript">
+  //<![CDATA[
+    const SHEET_URL = 'https://opensheet.elk.sh/1FE9BWGdDRklEvKlyCLan5HtL0nq_vHZL8IoxyeNNNS0/Sheet1';
+    fetch(SHEET_URL)
+      .then(res => res.json())
+      .then(data => {
+        const movieList = document.querySelector(".movie-list");
+        data.forEach((movie, i) => {
+          const card = document.createElement("div");
+          card.className = "movie-card";
+          card.innerHTML = `
+            <img src="${movie.image}" alt="${movie.title}" />
+            <div class="movie-title">${i + 1}. ${movie.title}</div>
+            <div class="movie-description">${movie.description}</div>
+            <a href="${movie.link}" class="download-btn" target="_blank">Watch Now</a>
+            <textarea placeholder="Paste or write script here..."></textarea>
+          `;
+          movieList.appendChild(card);
+        });
+      });
+  //]]>
+  </script>
+</body>
+</html>
